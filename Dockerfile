@@ -10,9 +10,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml poetry.lock ./
+
+# We update the command here to support Poetry 2.0+
 RUN pip install poetry && \
     poetry config virtualenvs.create false && \
-    poetry install --no-root --no-dev
+    poetry install --no-root --without dev
 
 # Stage 2: Runtime
 FROM python:3.11-slim

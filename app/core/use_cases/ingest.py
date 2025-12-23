@@ -21,11 +21,11 @@ class IngestService:
         # 1. Idempotency Check (The "Senior" Trait)
         cache_key = f"lead_processed:{payload.lead_id}"
         if await self.cache.get(cache_key):
-            await logger.warning("duplicate_lead_detected", lead_id=payload.lead_id)
+            logger.warning("duplicate_lead_detected", lead_id=payload.lead_id)
             return {"status": "skipped", "reason": "duplicate"}
 
         # 2. Structural Logging
-        await logger.info("ingesting_lead", 
+        logger.info("ingesting_lead", 
                           lead_id=payload.lead_id, 
                           email=payload.email, 
                           source=payload.source)
