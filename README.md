@@ -17,19 +17,19 @@ The system is built to survive technology shifts. The core business logic reside
 
 ```mermaid
 graph TD
-    Client[External Webhook Source] -->|HTTP POST| API[API Adapter (FastAPI)]
-    API -->|Validates| UseCase[Core: Ingest Service]
+    Client["External Webhook Source"] -->|HTTP POST| API["API Adapter (FastAPI)"]
+    API -->|Validates| UseCase["Core: Ingest Service"]
     
     subgraph "Hexagon (Core Domain)"
-        UseCase -->|Interface| DBPort[< Port > Database]
-        UseCase -->|Interface| CachePort[< Port > Cache]
+        UseCase -->|Interface| DBPort["< Port > Database"]
+        UseCase -->|Interface| CachePort["< Port > Cache"]
     end
     
-    DBPort -->|Implements| DBAdapter[Postgres Adapter]
-    CachePort -->|Implements| RedisAdapter[Redis Adapter]
+    DBPort -->|Implements| DBAdapter["Postgres Adapter"]
+    CachePort -->|Implements| RedisAdapter["Redis Adapter"]
     
-    DBAdapter -->|Persists| Postgres[(PostgreSQL)]
-    RedisAdapter -->|Checks| Redis[(Redis)]
+    DBAdapter -->|Persists| Postgres[("PostgreSQL")]
+    RedisAdapter -->|Checks| Redis[("Redis")]
 ```
 
 ## Key Architectural Decisions
